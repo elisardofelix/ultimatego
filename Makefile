@@ -94,3 +94,10 @@ dev-restart:
 dev-update: all dev-load dev-restart
 
 dev-update-apply: all dev-load dev-apply
+
+# ==============================================================================
+# Modules support
+
+tidy:
+	go mod tidy
+	go mod vendor
