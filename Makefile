@@ -101,6 +101,13 @@ run-help:
 
 
 # ==============================================================================
+# Metrics and Tracing
+
+metrics-view-sc:
+	expvarmon -ports="localhost:4000" -vars="build,requests,goroutines,errors,panics,mem:memstats.Alloc"
+
+
+# ==============================================================================
 # Modules support
 
 tidy:
