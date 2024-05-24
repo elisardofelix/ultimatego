@@ -14,9 +14,10 @@ import (
 	"time"
 
 	"github.com/ardanlabs/conf/v3"
-	v1 "github.com/elisardofelix/ultimatego/bussiness/web/v1"
+	"github.com/elisardofelix/ultimatego/app/services/sales-api/v1/handlers"
+	v1 "github.com/elisardofelix/ultimatego/business/web/v1"
 
-	"github.com/elisardofelix/ultimatego/bussiness/web/v1/debug"
+	"github.com/elisardofelix/ultimatego/business/web/v1/debug"
 	"github.com/elisardofelix/ultimatego/foundation/logger"
 )
 
@@ -111,7 +112,7 @@ func run(ctx context.Context, log *logger.Logger) error {
 		Log:      log,
 	}
 
-	apiMux := v1.APIMux(cfgMux)
+	apiMux := v1.APIMux(cfgMux, handlers.Routes{})
 
 	api := http.Server{
 		Addr:         cfg.Web.APIHost,
