@@ -19,6 +19,7 @@ import (
 
 	"github.com/elisardofelix/ultimatego/business/web/v1/debug"
 	"github.com/elisardofelix/ultimatego/foundation/logger"
+	"github.com/elisardofelix/ultimatego/foundation/web"
 )
 
 var build = "develop"
@@ -33,7 +34,7 @@ func main() {
 	}
 
 	traceIDFunc := func(ctx context.Context) string {
-		return ""
+		return web.GetTraceID(ctx)
 	}
 
 	log = logger.NewWithEvents(os.Stdout, logger.LevelInfo, "SALES-API", traceIDFunc, events)
