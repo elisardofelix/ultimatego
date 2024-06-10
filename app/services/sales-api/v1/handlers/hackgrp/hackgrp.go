@@ -12,6 +12,8 @@ import (
 
 func Hack(ctx context.Context, w http.ResponseWriter, r *http.Request) error {
 	if n := rand.Intn(100) % 2; n == 0 {
+		//The line here commented is to test the panic middleware
+		// panic("untrusted randomness")
 		return response.NewError(errors.New("TRUST ERROR"), http.StatusBadRequest)
 	}
 
