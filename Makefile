@@ -109,6 +109,9 @@ metrics-view-sc:
 curl:
 	curl -il http://localhost:3000/hack
 
+load:
+	hey -m GET -c 100 -n 100000 "http://localhost:3000/hack"
+
 # ==============================================================================
 # Modules support
 
