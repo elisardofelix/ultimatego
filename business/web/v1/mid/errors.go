@@ -4,6 +4,7 @@ import (
 	"context"
 	"net/http"
 
+	"github.com/elisardofelix/ultimatego/business/web/v1/auth"
 	"github.com/elisardofelix/ultimatego/business/web/v1/response"
 	"github.com/elisardofelix/ultimatego/foundation/logger"
 	"github.com/elisardofelix/ultimatego/foundation/web"
@@ -28,6 +29,12 @@ func Errors(log *logger.Logger) web.Middleware {
 						Error: reqErr.Error(),
 					}
 					status = reqErr.Status
+
+				case auth.IsAuthError(err):
+					er = response.ErrorDocument{
+						Error: http.StatusText(http.StatusUnauthorized),
+					}
+					status = http.StatusUnauthorized
 
 				default:
 					er = response.ErrorDocument{

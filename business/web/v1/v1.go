@@ -3,6 +3,7 @@ package v1
 import (
 	"os"
 
+	"github.com/elisardofelix/ultimatego/business/web/v1/auth"
 	"github.com/elisardofelix/ultimatego/business/web/v1/mid"
 	"github.com/elisardofelix/ultimatego/foundation/logger"
 	"github.com/elisardofelix/ultimatego/foundation/web"
@@ -13,6 +14,7 @@ type APIMuxConfig struct {
 	Build    string
 	Shutdown chan os.Signal
 	Log      *logger.Logger
+	Auth     *auth.Auth
 }
 
 // RouteAdder defines behavior that sets the routes to bind for an instance
