@@ -120,7 +120,7 @@ curl:
 
 
 curl-auth:
-	curl -il -H "Authorization: Bearer ${TOKEN}" http://localhost:3000/hack
+	curl -il -H "Authorization: Bearer ${TOKEN}" http://localhost:3000/hackauth
 
 
 load:
