@@ -2,14 +2,16 @@ package tests
 
 import (
 	"context"
+	"fmt"
 	"net/http"
 	"os"
-	"os/user"
 	"runtime/debug"
 	"testing"
 
 	"github.com/elisardofelix/ultimatego/app/services/sales-api/v1/handlers"
+	"github.com/elisardofelix/ultimatego/business/core/user"
 	"github.com/elisardofelix/ultimatego/business/data/dbtest"
+	"github.com/elisardofelix/ultimatego/business/data/order"
 	v1 "github.com/elisardofelix/ultimatego/business/web/v1"
 )
 
@@ -56,7 +58,16 @@ func Test_Web(t *testing.T) {
 	// -------------------------------------------------------------------------
 
 	seed := func(ctx context.Context, api dbtest.CoreAPIs) (seedData, error) {
-		return seedData{}, nil
+		usrs, err := api.User.Query(ctx, user.QueryFilter{}, order.By{Field: user.OrderByName, Direction: order.ASC}, 1, 2)
+		if err != nil {
+			return seedData{}, fmt.Errorf("seeding users : %w", err)
+		}
+
+		sd := seedData{
+			users: usrs,
+		}
+
+		return sd, nil
 	}
 
 	t.Log("Seeding data ...")
